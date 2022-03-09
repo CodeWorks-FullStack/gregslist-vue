@@ -17,6 +17,7 @@
       <i class="mdi mdi-plus"></i>
     </b>
     <div class="row mt-1">
+      <!-- NOTE v-for c(car) in cars, render a col-4 for each c and pass that data to the <Car/> component as props -->
       <div v-for="c in cars" :key="c.id" class="col-4 p-4 mb-2">
         <Car :car="c" />
       </div>

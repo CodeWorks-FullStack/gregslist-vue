@@ -121,6 +121,7 @@ export default {
   props: {
     carData: {
       type: Object,
+      // NOTE optional prop, no prop for creating a car, pass a prop to edit a car
       required: false,
       default: {},
     },
