@@ -1,6 +1,6 @@
 export const dev = window.location.origin.includes('localhost')
-export const baseURL = dev ? 'https://bcw-sandbox.herokuapp.com/' : ''
+export const baseURL = dev ? 'http://localhost:3000' : ''
 export const useSockets = false
-export const domain = ''
-export const clientId = ''
-export const audience = ''
+export const domain = 'dev-geue0lhy.us.auth0.com'
+export const clientId = 'NM80zhquib2VaNIlqci7Zt6tgu7BwUTx'
+export const audience = 'https://mark-dev.com'

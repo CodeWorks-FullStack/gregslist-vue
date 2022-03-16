@@ -2,8 +2,8 @@
   <header>
     <Navbar />
   </header>
-  <main class="container-fluid">
-    <div class="row">
+  <main class="container-fluid d-flex">
+    <div class="row flex-grow-1">
       <div class="col-2 p-0">
         <Sidebar />
       </div>
@@ -12,22 +12,17 @@
       </div>
     </div>
   </main>
-  <footer>
-    <div class="bg-dark text-light text-center p-4">
-      Made with 💖 by CodeWorks
-    </div>
-  </footer>
 </template>
 
 <script>
-import { computed } from "vue";
-import { AppState } from "./AppState";
+import { computed } from "vue"
+import { AppState } from "./AppState"
 export default {
   name: "App",
   setup() {
     return {
       appState: computed(() => AppState),
-    };
+    }
   },
 };
 </script>

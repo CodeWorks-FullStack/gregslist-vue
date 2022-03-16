@@ -17,13 +17,12 @@
       <i class="mdi mdi-plus"></i>
     </b>
     <div class="row mt-1">
-      <!-- NOTE v-for c(car) in cars, render a col-4 for each c and pass that data to the <Car/> component as props -->
-      <div v-for="c in cars" :key="c.id" class="col-4 p-4 mb-2">
+      <div v-for="c in cars" :key="c.id" class="col-md-4 p-4 mb-2">
         <Car :car="c" />
       </div>
     </div>
     <Modal>
-      <template #modal-title>Create Car</template>
+      <template #modal-title class="bg-primary">Create Car</template>
       <template #modal-body><CarForm /></template>
     </Modal>
   </div>
@@ -31,24 +30,24 @@
 
 
 <script>
-import { AppState } from "../AppState";
-import { computed, reactive, onMounted } from "vue";
-import { carsService } from "../services/CarsService";
-import Pop from "../utils/Pop";
-import { logger } from "../utils/Logger";
+import { AppState } from "../AppState"
+import { computed, reactive, onMounted } from "vue"
+import { carsService } from "../services/CarsService"
+import Pop from "../utils/Pop"
+import { logger } from "../utils/Logger"
 export default {
   setup() {
     onMounted(async () => {
       try {
-        await carsService.getAll();
+        await carsService.getAll()
       } catch (error) {
-        Pop.toast(error.message, "error");
-        logger.error(error);
+        Pop.toast(error.message, "error")
+        logger.error(error)
       }
-    });
+    })
     return {
       cars: computed(() => AppState.cars),
-    };
+    }
   },
 };
 </script>
@@ -61,7 +60,7 @@ export default {
   width: 60px;
   z-index: 100;
   position: fixed;
-  bottom: 10vh;
-  right: 5vh;
+  bottom: 2vh;
+  right: 2vh;
 }
 </style>

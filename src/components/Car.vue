@@ -7,20 +7,14 @@
       <h3 class="text-center col-12">
         {{ car.make }} | {{ car.model }}| {{ car.year }}
       </h3>
-      <!-- <div class="col-12">
-      <p>{{ car.description }}</p>
-      <p>{{ car.price }}</p>
-      <p>{{ car.year }}</p>
-      <input type="color" disabled :value="car.color" />
-    </div> -->
     </div>
   </router-link>
 </template>
 
 
 <script>
-import { AppState } from "../AppState";
-import { computed, reactive, onMounted } from "vue";
+import { AppState } from "../AppState"
+import { computed, reactive, onMounted } from "vue"
 export default {
   props: {
     car: {
@@ -29,7 +23,7 @@ export default {
     },
   },
   setup() {
-    return {};
+    return {}
   },
 };
 </script>
