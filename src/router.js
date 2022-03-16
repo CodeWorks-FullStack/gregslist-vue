@@ -35,3 +35,8 @@ export const router = createRouter({
   history: createWebHashHistory(),
   routes
 })
+
+// NOTE look how cool this is yo!
+router.afterEach((to) => {
+  document.title = "Gregslist | " + to.name
+})

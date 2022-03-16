@@ -4,8 +4,8 @@
       <div class="col-12">
         <img class="img-fluid" :src="car.imgUrl" alt="" />
       </div>
-      <h3 class="text-center col-12">
-        {{ car.make }} | {{ car.model }}| {{ car.year }}
+      <h3 class="text-center col-12 text-uppercase">
+        {{ car.make }} | {{ car.model }} | {{ car.year }}
       </h3>
     </div>
   </router-link>
