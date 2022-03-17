@@ -21,14 +21,14 @@
     <div class="row mt-3 bg-light shadow p-4">
       <div class="d-flex justify-content-between">
         <h4>Bids</h4>
-        <!-- FIXME This button always shows up? I only want it disabled when not logged in and only show if you have not yet bid -->
-        <button class="btn btn-success" @click="createBid">
+        <!-- NOTE This button always shows up? I only want it disabled when not logged in and only show if you have not yet bid -->
+        <button v-if="!hasBid" class="btn btn-success" @click="createBid">
           Bid ${{ formatNumber(car.price + 100) }}
         </button>
       </div>
-      <!-- FIXME why are they out of order? the highest bid should be first -->
-      <div class="col-12" v-for="b in bids" :key="b.id">
-        <Bid :bid="b" />
+      <!-- NOTE why are they out of order? the highest bid should be first -->
+      <div class="col-12" v-for="ab in bids" :key="ab.id">
+        <Bid :accountBid="ab" />
       </div>
     </div>
     <Modal>
@@ -40,43 +40,51 @@
 
 
 <script>
-import { AppState } from "../AppState"
-import { computed, reactive, onMounted } from "vue"
-import { logger } from "../utils/Logger"
-import Pop from "../utils/Pop"
-import { carsService } from "../services/CarsService"
-import { bidsService } from "../services/BidsService"
-import { useRoute } from "vue-router"
-import { Modal } from "bootstrap"
+import { AppState } from "../AppState";
+import { computed, reactive, onMounted } from "vue";
+import { logger } from "../utils/Logger";
+import Pop from "../utils/Pop";
+import { carsService } from "../services/CarsService";
+import { bidsService } from "../services/BidsService";
+import { useRoute } from "vue-router";
+import { Modal } from "bootstrap";
 export default {
   setup() {
-    const route = useRoute()
+    const route = useRoute();
     onMounted(async () => {
       try {
         // NOTE this first line is only to get rid of the previous car from showing up for half a second as we pick a new active car. not required to work.
-        AppState.activeCar = {}
-        await carsService.getById(route.params.id)
-        await bidsService.getCarBids(route.params.id)
+        AppState.activeCar = {};
+        await carsService.getById(route.params.id);
+        await bidsService.getCarBids(route.params.id);
       } catch (error) {
-        logger.log(error)
-        Pop.toast(error.message, "error")
+        logger.log(error);
+        Pop.toast(error.message, "error");
       }
-    })
+    });
     return {
       car: computed(() => AppState.activeCar),
-      bids: computed(() => AppState.bids),
+      bids: computed(() => AppState.bids.sort((a, b) => b.amount - a.amount)),
+      hasBid: computed(() =>
+        AppState.bids.find((b) => b.id == AppState.account.id)
+      ),
       createBid() {
         // FIXME this isn't working?
-        bidsService.createBid()
+        let newBid = {
+          accountId: AppState.account.id,
+          carId: AppState.activeCar.id,
+          amount: AppState.activeCar.price + 100,
+        };
+        bidsService.createBid(newBid);
       },
       openModal() {
-        Modal.getOrCreateInstance(document.getElementById("form-modal")).show()
+        Modal.getOrCreateInstance(document.getElementById("form-modal")).show();
       },
       formatNumber(num) {
-        const iNF = new Intl.NumberFormat('en-US')
-        return iNF.format(num)
-      }
-    }
+        const iNF = new Intl.NumberFormat("en-US");
+        return iNF.format(num);
+      },
+    };
   },
 };
 </script>

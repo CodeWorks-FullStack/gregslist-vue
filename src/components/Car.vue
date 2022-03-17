@@ -7,14 +7,17 @@
       <h3 class="text-center col-12 text-uppercase">
         {{ car.make }} | {{ car.model }} | {{ car.year }}
       </h3>
+      <div v-if="car.bidId" class="bg-dark text-light">
+        current highest bid: ${{ formatNumber(car.amount) }}
+      </div>
     </div>
   </router-link>
 </template>
 
 
 <script>
-import { AppState } from "../AppState"
-import { computed, reactive, onMounted } from "vue"
+import { AppState } from "../AppState";
+import { computed, reactive, onMounted } from "vue";
 export default {
   props: {
     car: {
@@ -23,7 +26,12 @@ export default {
     },
   },
   setup() {
-    return {}
+    return {
+      formatNumber(num) {
+        const iNF = new Intl.NumberFormat("en-US");
+        return iNF.format(num);
+      },
+    };
   },
 };
 </script>
