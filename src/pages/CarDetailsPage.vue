@@ -65,11 +65,12 @@ export default {
     return {
       car: computed(() => AppState.activeCar),
       bids: computed(() => AppState.bids.sort((a, b) => b.amount - a.amount)),
+      // NOTE finds the bid if it includes your id on it. A bid returned is truthy, otherwise it returns undefined which is falsey
       hasBid: computed(() =>
         AppState.bids.find((b) => b.id == AppState.account.id)
       ),
       createBid() {
-        // FIXME this isn't working?
+        // NOTE assemble data for new bid
         let newBid = {
           accountId: AppState.account.id,
           carId: AppState.activeCar.id,

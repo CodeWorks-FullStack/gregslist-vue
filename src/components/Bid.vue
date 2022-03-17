@@ -40,6 +40,7 @@ export default {
   },
   setup(props) {
     return {
+      // NOTE grab the highest bid, sort here sorts largest amounts first
       highestBid: computed(
         () => AppState.bids.sort((a, b) => b.amount - a.amount)[0]
       ),
