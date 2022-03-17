@@ -5,6 +5,7 @@
     <p>{{ account.email }}</p>
     <div class="container-fluid">
       <div class="row">
+        <!-- NOTE reuse car component cause it's already a good display for a car that's already written -->
         <div class="col-12" v-for="c in myCars" :key="c.id">
           <Car :car="c" />
         </div>

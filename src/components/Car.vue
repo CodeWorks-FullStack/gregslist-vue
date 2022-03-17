@@ -7,6 +7,7 @@
       <h3 class="text-center col-12 text-uppercase">
         {{ car.make }} | {{ car.model }} | {{ car.year }}
       </h3>
+      <!-- NOTE v-if here cause the amount doesn't exist on all cars, just cars from bids -->
       <div v-if="car.bidId" class="bg-dark text-light">
         current highest bid: ${{ formatNumber(car.amount) }}
       </div>
